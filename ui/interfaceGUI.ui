@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ventana</class>
+ <widget class="QDialog" name="ventana">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>853</width>
+    <height>549</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Clasificación del suelo Mónaco</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icono.qrc">
+    <normaloff>:/icono/img/icon.ico</normaloff>:/icono/img/icon.ico</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <widget class="QPushButton" name="filtroRural">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>120</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Filtro Rural</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="filtroUrbano">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>90</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Filtro Urbano</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="graficoDeBarras">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>150</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Grafico de Barras</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="graficoDeDispercion">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>180</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Grafico de Dispersión</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cargarMapa">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>310</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Cargar Mapa</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="graficoDeConfucion">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>210</y>
+     <width>161</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Grafico de Confución</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>10</y>
+     <width>251</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>26</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Análisis Mónaco</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelUrbano">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>62</y>
+     <width>641</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/imagen/img/b5.tif);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelRural">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>62</y>
+     <width>641</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/imagen/img/b4.tif);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelBarras">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>62</y>
+     <width>641</width>
+     <height>451</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/graficoBarras/img/graficoBarras.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="mapa.qrc"/>
+  <include location="mapa1.qrc"/>
+  <include location="graficoDispercion.qrc"/>
+  <include location="bandaSobreBanda.qrc"/>
+  <include location="graficoBarras.qrc"/>
+  <include location="icono.qrc"/>
+ </resources>
+ <connections/>
+</ui>
