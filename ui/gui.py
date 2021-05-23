@@ -145,6 +145,7 @@ class Ui_ventana(QMainWindow):
         label.setPixmap(imagen)
 
     def Cargar(self):
+        print(0)
         self.diagramBarras.setVisible(False)
         self.diagramDispercion.setVisible(False)
 
@@ -164,8 +165,11 @@ class Ui_ventana(QMainWindow):
             self.confirmacionDOS.setVisible(False)
             self.cargarMapa.setDisabled(True)
             self.cargarMapa.setVisible(False)
-            model = joblib.load('img/monacoEntrenado.joblib')
+            print(1)
+            model = joblib.load('monacoEntrenado.joblib')
+            print(2)
             monacoPavariar.predecir(self.a[0], self.a[1], model)
+            print(3)
             #time.sleep(2)
             self.graficoDeDispercion.setVisible(True)
             self.graficoDeBarras.setVisible(True)

@@ -6,17 +6,18 @@ import cv2
 import joblib
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
-
+import rasterio
 
 def mapa(band4Path):
     print("1")
-    band4 = Image.open(band4Path)
+    band4 = rasterio.open(band4Path)
     print("2")
-    band4Copy = band4
-    band4Copy = np.array(band4Copy.getdata()).reshape(band4Copy.size[1], band4Copy[0], 3)
-    #band4.dtype
+   # band4Copy = band4
+   # band4Copy = np.array(band4Copy.getdata()).reshape(band4Copy.size[1], band4Copy[0], 3)
+    band4.dtypes
     print("3")
     band4.transform
+    band4.crs
     plt.imshow(band4)
 
     plt.savefig(r'..\ui\img\mapa.png', dpi=None, facecolor='w',
