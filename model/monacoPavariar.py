@@ -35,10 +35,7 @@ def mapa(band4Path):
     mask = cv2.inRange(image, lower, upper)
     output = cv2.bitwise_and(image, image, mask=mask)
     plt.plot()
-    #plt.subplot(1, 2, 1)
     plt.imshow(mask, cmap="gray")
-    #plt.subplot(1, 2, 2)
-    #plt.imshow(output)
 
     plt.savefig(r'..\ui\img\mapaBinario.png', dpi=None, facecolor='w',
                 edgecolor='w',

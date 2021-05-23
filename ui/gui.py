@@ -61,8 +61,18 @@ class Ui_ventana(QMainWindow):
         font.setPointSize(12)
         self.mostarMapa.setFont(font)
         self.mostarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
-        self.mostarMapa.setObjectName("graficoDeDispercion")
+        self.mostarMapa.setObjectName("mostrarMapa")
         self.mostarMapa.setVisible(False)
+
+        self.mostrarBinario = QtWidgets.QPushButton(ventana)
+        self.mostrarBinario.setGeometry(QtCore.QRect(680, 180, 161, 27))
+        self.mostrarBinario.clicked.connect(self.showBinario)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.mostrarBinario.setFont(font)
+        self.mostrarBinario.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
+        self.mostrarBinario.setObjectName("mostrarBinario")
+        self.mostrarBinario.setVisible(False)
 
         self.cargarMapa = QtWidgets.QPushButton(ventana)
         self.cargarMapa.clicked.connect(self.Cargar)
@@ -87,6 +97,11 @@ class Ui_ventana(QMainWindow):
         self.labelMapa.setGeometry(QtCore.QRect(16, 62, 641, 451))
         self.labelMapa.setText("")
         self.labelMapa.setObjectName("labelMapa")
+
+        self.labelBinario = QtWidgets.QLabel(ventana)
+        self.labelBinario.setGeometry(QtCore.QRect(16, 62, 641, 451))
+        self.labelBinario.setText("")
+        self.labelBinario.setObjectName("labelBinario")
 
         self.diagramBarras = QtWidgets.QLabel(ventana)
         self.diagramBarras.setGeometry(QtCore.QRect(16, 62, 641, 451))
@@ -122,15 +137,17 @@ class Ui_ventana(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(ventana)
 
     def showDispercion(self):
+        self.diagramDispercion.setVisible(True)
+        self.labelBinario.setVisible(False)
         self.labelMapa.setVisible(False)
         self.diagramBarras.setVisible(False)
-        self.diagramDispercion.setVisible(True)
         self.confirmacionUNO.setVisible(False)
         self.confirmacionDOS.setVisible(False)
         self.diagramDispercion.setStyleSheet("border-image: url(img/graficoDispercion.png);")
 
     def showMapa(self):
         self.labelMapa.setVisible(True)
+        self.labelBinario.setVisible(False)
         self.diagramDispercion.setVisible(False)
         self.diagramBarras.setVisible(False)
         self.confirmacionUNO.setVisible(False)
@@ -138,12 +155,18 @@ class Ui_ventana(QMainWindow):
         self.labelMapa.setStyleSheet("border-image: url(img/mapa.png);")
 
     def showBarras(self):
-        self.labelMapa.setVisible(False)
         self.diagramBarras.setVisible(True)
+        self.labelMapa.setVisible(False)
         self.diagramDispercion.setVisible(False)
         self.confirmacionUNO.setVisible(False)
         self.confirmacionDOS.setVisible(False)
         self.diagramBarras.setStyleSheet("border-image: url(img/graficoBarras.jpg);")
+
+    def showBinario(self):
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
+        #Aquí muestra la otra ventana
+        monacoPavariar.mapa(self.a[0])
 
     def retranslateUi(self, ventana):
         _translate = QtCore.QCoreApplication.translate
@@ -151,6 +174,7 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.mostarMapa.setText(_translate("ventana", "Combinación bandas"))
+        self.mostrarBinario.setText(_translate("ventana", "Mapa binario"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
         self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
                                                            "correctamente"))
@@ -171,6 +195,7 @@ class Ui_ventana(QMainWindow):
         self.diagramBarras.setVisible(False)
         self.diagramDispercion.setVisible(False)
         self.mostarMapa.setVisible(False)
+        self.mostrarBinario.setVisible(False)
 
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
@@ -192,6 +217,7 @@ class Ui_ventana(QMainWindow):
             self.graficoDeDispercion.setVisible(True)
             self.graficoDeBarras.setVisible(True)
             self.mostarMapa.setVisible(True)
+            self.mostrarBinario.setVisible(True)
 
 
 class visorImagenes(QMainWindow):
