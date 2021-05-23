@@ -76,7 +76,7 @@ def grafica(df):
     plt.title('Clasificacion de suelo urbano vs no urbano')
 
     #plt.show()
-    plt.savefig(r'C:\Users\prestamo\PycharmProjects\Monaco\ui\img\barras.png', dpi=None, facecolor='w', edgecolor='w',
+    plt.savefig(r'..\ui\img\graficoBarras.jpg', dpi=None, facecolor='w', edgecolor='w',
         orientation='portrait', papertype=None, format=None,
         transparent=False, bbox_inches=None, pad_inches=0.1,
         frameon=None, metadata=None)
@@ -101,7 +101,7 @@ def dispersion(df):
 
     #plt.show()
 
-    plt.savefig(r'C:\Users\prestamo\PycharmProjects\Monaco\ui\img\dispersion.png', dpi=None, facecolor='w',
+    plt.savefig(r'..\ui\img\graficoDispercion.png', dpi=None, facecolor='w',
                 edgecolor='w',
                 orientation='portrait', papertype=None, format=None,
                 transparent=False, bbox_inches=None, pad_inches=0.1,
