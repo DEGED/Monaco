@@ -110,7 +110,6 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.cargarMapa.setText(_translate("ventana", "Cargar bandas"))
-        self.graficoDeConfucion.setText(_translate("ventana", "Grafico de Confución"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
 
     def Mostrar(self, label, imagen, nombre, posicionX=650):
