@@ -26,24 +26,8 @@ class Ui_ventana(QMainWindow):
         ventana.setWindowOpacity(1.0)
         ventana.setStyleSheet("background-color: rgb(43, 43, 43);")
 
-        self.filtroRural = QtWidgets.QPushButton(ventana)
-        self.filtroRural.setGeometry(QtCore.QRect(680, 120, 161, 23))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.filtroRural.setFont(font)
-        self.filtroRural.setStyleSheet("color: rgb(230, 230, 230);")
-        self.filtroRural.setObjectName("filtroRural")
-
-        self.filtroUrbano = QtWidgets.QPushButton(ventana)
-        self.filtroUrbano.setGeometry(QtCore.QRect(680, 90, 161, 23))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.filtroUrbano.setFont(font)
-        self.filtroUrbano.setStyleSheet("color: rgb(230, 230, 230);")
-        self.filtroUrbano.setObjectName("filtroUrbano")
-
         self.graficoDeBarras = QtWidgets.QPushButton(ventana)
-        self.graficoDeBarras.setGeometry(QtCore.QRect(680, 150, 161, 23))
+        self.graficoDeBarras.setGeometry(QtCore.QRect(680, 90, 161, 25))
         self.graficoDeBarras.clicked.connect(self.showBarras)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -52,7 +36,7 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setObjectName("graficoDeBarras")
 
         self.graficoDeDispercion = QtWidgets.QPushButton(ventana)
-        self.graficoDeDispercion.setGeometry(QtCore.QRect(680, 180, 161, 23))
+        self.graficoDeDispercion.setGeometry(QtCore.QRect(680, 120, 161, 25))
         self.graficoDeDispercion.clicked.connect(self.showDispercion)
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -63,21 +47,13 @@ class Ui_ventana(QMainWindow):
         self.cargarMapa = QtWidgets.QPushButton(ventana)
         self.cargarMapa.clicked.connect(self.Cargar)
         # self.cargarMapa.clicked.connect(self.loadTif)
-        self.cargarMapa.setGeometry(QtCore.QRect(710, 310, 101, 31))
+        self.cargarMapa.setGeometry(QtCore.QRect(710, 300, 121, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cargarMapa.setFont(font)
         self.cargarMapa.setStyleSheet("color: rgb(230, 230, 230);")
         self.cargarMapa.setText("Cargar banda")
         self.cargarMapa.setObjectName("cargarMapa")
-
-        self.graficoDeConfucion = QtWidgets.QPushButton(ventana)
-        self.graficoDeConfucion.setGeometry(QtCore.QRect(680, 210, 161, 23))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.graficoDeConfucion.setFont(font)
-        self.graficoDeConfucion.setStyleSheet("color: rgb(230, 230, 230);")
-        self.graficoDeConfucion.setObjectName("graficoDeConfucion")
 
         self.title = QtWidgets.QLabel(ventana)
         self.title.setGeometry(QtCore.QRect(230, 10, 251, 31))
@@ -131,11 +107,9 @@ class Ui_ventana(QMainWindow):
     def retranslateUi(self, ventana):
         _translate = QtCore.QCoreApplication.translate
         ventana.setWindowTitle(_translate("ventana", "Clasificación del suelo Mónaco"))
-        self.filtroRural.setText(_translate("ventana", "Filtro Rural"))
-        self.filtroUrbano.setText(_translate("ventana", "Filtro Urbano"))
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
-        self.cargarMapa.setText(_translate("ventana", "Cargar Mapa"))
+        self.cargarMapa.setText(_translate("ventana", "Cargar bandas"))
         self.graficoDeConfucion.setText(_translate("ventana", "Grafico de Confución"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
 
@@ -159,47 +133,7 @@ class Ui_ventana(QMainWindow):
         if len(self.a) >= 2:
             self.cargarMapa.setDisabled(True)
 
-        '''
-        if nombreImagen:
-            # Verificar que QLabel tiene imagen
-            labelConImagen = ""
-            if self.labelMapa.pixmap():
-                labelConImagen = self.labelImagen
 
-            imagen = QImage(nombreImagen)
-            if imagen.isNull():
-                if labelConImagen:
-                    self.Eliminar()
-
-                QMessageBox.information(self, "Visor de imágenes",
-                                        "No se puede cargar %s." % nombreImagen)
-                return
-
-            # Obtener ruta de la carpeta que contiene la imagen seleccionada
-            self.carpetaActual = QDir(QFileInfo(nombreImagen).absoluteDir().path())
-
-            # Obtener la ruta y el nombre de las imagenes que se encuentren en la carpeta de
-            # la imagen seleccionada
-            imagenes = self.carpetaActual.entryInfoList(["*.tif"],
-                                                        QDir.Files, QDir.Name)
-            self.imagenesCarpeta = [imagen.absoluteFilePath() for imagen in imagenes]
-
-            self.posicion = self.imagenesCarpeta.index(nombreImagen)
-            self.estadoAnterior = True if self.posicion == 0 else False
-            self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta) - 1 else False
-
-            # Nombre y extensión de la imagen
-            nombre = QFileInfo(nombreImagen).fileName()
-
-            if labelConImagen:
-                posicionInternaX = -650
-                labelMostrarImagen = self.labelImagen if self.labelImagenUno.pixmap() else self.labelImagenUno
-                self.Limpiar(labelConImagen, labelMostrarImagen, imagen, nombre, posicionInternaX)
-            else:
-                self.Mostrar(self.labelMapa, imagen, nombre)
-        '''
-
-# ====================== CLASE visorImagenes =======================
 
 class visorImagenes(QMainWindow):
     def __init__(self, parent=None):
