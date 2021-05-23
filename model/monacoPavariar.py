@@ -13,6 +13,12 @@ from rasterio import plot
 from sklearn.preprocessing import MinMaxScaler
 
 def mapa(band4Path):
+    """
+    this method transform the band4 tiff image that is going to be used, the transformation consist in apply
+    rasterio filters to identify better the urban and rural zones. When the image is transformed the function
+    use OpenCV to highlight the urban zones and save it as a png image that is going to be shown in the GUI .
+    :param band4Path: the path in where the band4 is going to be used
+    """
     band4 = rasterio.open(band4Path)
     band4.height
     band4.width
@@ -44,6 +50,12 @@ def mapa(band4Path):
 
 
 def cargar2(band4Path, band5Path):
+    """
+        this funtion allows to charge the data from the .tiff
+        :param band4Path: this param is use to take the path from the first band image that is going to be processed
+        :param band5Path: this param is use to take the path from the second band image that is going to be processed
+        :return: the data from the .tiff images in a data frame
+    """
     # Open the image
     band4 = rasterio.open(band4Path)
     band5 = rasterio.open(band5Path)
@@ -67,6 +79,13 @@ def cargar2(band4Path, band5Path):
     return df
 
 def predecir(pathbanda4, pathbanda5, model):
+    """
+        this funtion is use for generate the predictons in base of the data extracted from the .tiff images
+        :param pathbanda4: this param is use to take the path from the first band image that is going to be processed in the cargar2 method
+        :param pathbanda5: this param is use to take the path from the second band image that is going to be processed in the cargar2 method
+        :param model: this param is the model trained from the sklearn, is loaded a from file .joblib
+        :return: the funtion return the predictions that is a data frame with 1 and 0 representing the urban and rural zones
+    """
     data = cargar2(pathbanda4, pathbanda5)
     predictions = model.predict(data)
     grafica(predictions)
@@ -76,6 +95,11 @@ def predecir(pathbanda4, pathbanda5, model):
     return predictions
 
 def listar(matrix):
+    """
+    this functions is use to convert a 2-D matrix in a list
+    :param matrix: the matrix that is going to be converted in a list
+    :return: a list that is the conversion from the matrix param
+    """
     resultado = []
     for lista in matrix:
         for object in lista:
@@ -84,7 +108,11 @@ def listar(matrix):
     return resultado
 
 def grafica(df):
-
+    """
+    this method is used to generate a bar graph from a data frame and to save the bar graph ass a image .png and show it in the  GUI
+    :param df: the data frame that is going to be use to generate the bar graph
+    """
+    print(df.value_counts()[1])
     urbano = [82068]
     noUrbano = [301155]
 
@@ -107,6 +135,11 @@ def grafica(df):
     plt.close()
 
 def normalizar(df):
+    """
+    this function is used to normalize in a range a data frame with the respective parameters "red" and "nir"
+    :param df: the data frame that is going to be normalized in a range
+    :return: the final data frame normalized from the initial data frame passed as a param
+    """
     variables_input = ['red', 'nir']
 
     df = deepcopy(df[variables_input])
@@ -122,7 +155,10 @@ def normalizar(df):
 
 
 def dispersion(df):
-
+    """
+    this function is use to generate the dispersion graph from the data in a data frame and save it as png image
+    :param df: data frame that is going to be use to generate a dispersion graph
+    """
     fig = plt.figure(figsize=(15, 9))
     ax = plt.axes()
     # We create the axes of the graph
