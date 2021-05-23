@@ -24,6 +24,8 @@ class Ui_ventana(QMainWindow):
     def setupUi(self, ventana):
         ventana.setObjectName("ventana")
         ventana.resize(853, 549)
+        ventana.setMinimumSize(853, 549)
+        ventana.setMaximumSize(853, 549)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("./img/icon.ico"))
         ventana.setWindowIcon(icon)

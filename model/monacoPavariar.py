@@ -18,7 +18,8 @@ def mapa(band4Path):
     print("3")
     band4.transform
     band4.crs
-    plt.imshow(band4)
+    #aqui se puteo
+    #plt.imshow(band4)
 
     plt.savefig(r'..\ui\img\mapa.png', dpi=None, facecolor='w',
                 edgecolor='w',
@@ -61,13 +62,11 @@ def cargar2(band4Path, band5Path):
 def predecir(pathbanda4, pathbanda5, model):
     data = cargar2(pathbanda4, pathbanda5)
     predictions = model.predict(data)
-    print(predictions)
-
     grafica(predictions)
     data['ndvi'] = predictions
     dispersion(data)
     print("0")
-    #mapa(pathbanda4)
+    mapa(pathbanda4)
     return predictions
 
 def listar(matrix):
