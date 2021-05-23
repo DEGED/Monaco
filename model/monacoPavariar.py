@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,6 +9,8 @@ import joblib
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 import rasterio
+from sklearn.preprocessing import MinMaxScaler
+
 
 def mapa(band4Path):
     print("1")
@@ -55,8 +59,9 @@ def cargar2(band4Path, band5Path):
 
     data = {'red': red,'nir': nir}
     df = pd.DataFrame(data, columns = ['red', 'nir'])
+    dfCopy = normalizar(df)
 
-    return df
+    return dfCopy
 
 def predecir(pathbanda4, pathbanda5, model):
     data = cargar2(pathbanda4, pathbanda5)
@@ -102,6 +107,22 @@ def grafica(df):
     plt.savefig(r'..\ui\img\graficoBarras.jpg', dpi=None, facecolor='w', edgecolor='w',
         orientation='portrait', format=None,
         transparent=False, bbox_inches=None, pad_inches=0.1)
+
+def normalizar(df):
+    variables_input = ['red', 'green', 'blue']
+
+    df_x = deepcopy(df[variables_input])
+    print('\nDataframe de entrada:')
+    print(df_x)
+
+    rango_de_salida_de_las_variables_escaladas = (
+        0, 1)  # Tupla con el siguiente formato: (mínimo deseado, máximo deseado).
+    scaler = MinMaxScaler(feature_range=rango_de_salida_de_las_variables_escaladas)
+
+    df_x[variables_input] = scaler.fit_transform(df_x[variables_input])
+
+    return df_x
+
 
 
 

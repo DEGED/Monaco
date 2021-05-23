@@ -166,7 +166,7 @@ class Ui_ventana(QMainWindow):
             self.cargarMapa.setDisabled(True)
             self.cargarMapa.setVisible(False)
             print(1)
-            model = joblib.load('monacoEntrenado.joblib')
+            model = joblib.load(r'monacoEntrenado.joblib')
             print(2)
             monacoPavariar.predecir(self.a[0], self.a[1], model)
             print(3)
