@@ -32,7 +32,7 @@ class Ui_ventana(QMainWindow):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.graficoDeBarras.setFont(font)
-        self.graficoDeBarras.setStyleSheet("color: rgb(230, 230, 230);")
+        self.graficoDeBarras.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
         self.graficoDeBarras.setObjectName("graficoDeBarras")
 
         self.graficoDeDispercion = QtWidgets.QPushButton(ventana)
@@ -41,7 +41,7 @@ class Ui_ventana(QMainWindow):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.graficoDeDispercion.setFont(font)
-        self.graficoDeDispercion.setStyleSheet("color: rgb(230, 230, 230);")
+        self.graficoDeDispercion.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
         self.graficoDeDispercion.setObjectName("graficoDeDispercion")
 
         self.cargarMapa = QtWidgets.QPushButton(ventana)
@@ -51,7 +51,7 @@ class Ui_ventana(QMainWindow):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cargarMapa.setFont(font)
-        self.cargarMapa.setStyleSheet("color: rgb(230, 230, 230);")
+        self.cargarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(255, 255, 255);")
         self.cargarMapa.setText("Cargar banda")
         self.cargarMapa.setObjectName("cargarMapa")
 
@@ -109,7 +109,6 @@ class Ui_ventana(QMainWindow):
         ventana.setWindowTitle(_translate("ventana", "Clasificación del suelo Mónaco"))
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
-        self.cargarMapa.setText(_translate("ventana", "Cargar bandas"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
 
     def Mostrar(self, label, imagen, nombre, posicionX=650):

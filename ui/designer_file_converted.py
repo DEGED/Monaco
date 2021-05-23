@@ -16,28 +16,25 @@ class Ui_ventana(object):
         icon.addPixmap(QtGui.QPixmap(":/icono/img/icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         ventana.setWindowIcon(icon)
         ventana.setWindowOpacity(1.0)
-
         self.graficoDeBarras = QtWidgets.QPushButton(ventana)
         self.graficoDeBarras.setGeometry(QtCore.QRect(680, 90, 161, 25))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.graficoDeBarras.setFont(font)
         self.graficoDeBarras.setObjectName("graficoDeBarras")
-
         self.graficoDeDispercion = QtWidgets.QPushButton(ventana)
         self.graficoDeDispercion.setGeometry(QtCore.QRect(680, 120, 161, 25))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.graficoDeDispercion.setFont(font)
         self.graficoDeDispercion.setObjectName("graficoDeDispercion")
-
         self.cargarMapa = QtWidgets.QPushButton(ventana)
-        self.cargarMapa.setGeometry(QtCore.QRect(710, 300, 101, 31))
+        self.cargarMapa.setGeometry(QtCore.QRect(710, 300, 121, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cargarMapa.setFont(font)
+        self.cargarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(255, 255, 255);")
         self.cargarMapa.setObjectName("cargarMapa")
-
         self.title = QtWidgets.QLabel(ventana)
         self.title.setGeometry(QtCore.QRect(230, 10, 251, 31))
         font = QtGui.QFont()
@@ -70,7 +67,7 @@ class Ui_ventana(object):
         ventana.setWindowTitle(_translate("ventana", "Clasificación del suelo Mónaco"))
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
-        self.cargarMapa.setText(_translate("ventana", "Cargar Mapa"))
+        self.cargarMapa.setText(_translate("ventana", "Cargar bandas"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
 
 import bandaSobreBanda_rc

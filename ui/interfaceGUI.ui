@@ -61,7 +61,7 @@
     <rect>
      <x>710</x>
      <y>300</y>
-     <width>101</width>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>
@@ -70,8 +70,12 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(60, 63, 65);
+color: rgb(255, 255, 255);</string>
+   </property>
    <property name="text">
-    <string>Cargar Mapa</string>
+    <string>Cargar bandas</string>
    </property>
   </widget>
   <widget class="QLabel" name="title">
