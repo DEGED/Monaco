@@ -9,27 +9,24 @@ import joblib
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 import rasterio
+from rasterio import plot
 from sklearn.preprocessing import MinMaxScaler
 
-
 def mapa(band4Path):
-    print("1")
     band4 = rasterio.open(band4Path)
-    print("2")
-   # band4Copy = band4
-   # band4Copy = np.array(band4Copy.getdata()).reshape(band4Copy.size[1], band4Copy[0], 3)
-    band4.dtypes
-    print("3")
+    band4.height
+    band4.width
+    plot.show(band4)
+    band4.dtypes[0]
     band4.transform
     band4.crs
-    #aqui se puteo
-    #plt.imshow(band4)
+    band4.read(1)
 
     plt.savefig(r'..\ui\img\mapa.png', dpi=None, facecolor='w',
                 edgecolor='w',
                 orientation='portrait', format=None,
                 transparent=False, bbox_inches=None, pad_inches=0.1)
-    print("4")
+
     image = cv2.imread(r'..\ui\img\mapa.png')
     original = image.copy()
     image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -37,20 +34,28 @@ def mapa(band4Path):
     upper = np.array([45, 255, 255], dtype="uint8")
     mask = cv2.inRange(image, lower, upper)
     output = cv2.bitwise_and(image, image, mask=mask)
-    plt.subplot(1, 2, 1)
+    plt.plot()
+    #plt.subplot(1, 2, 1)
     plt.imshow(mask, cmap="gray")
-    plt.subplot(1, 2, 2)
-    plt.imshow(output)
+    #plt.subplot(1, 2, 2)
+    #plt.imshow(output)
+
+    plt.savefig(r'..\ui\img\mapaBinario.png', dpi=None, facecolor='w',
+                edgecolor='w',
+                orientation='portrait', format=None,
+                transparent=False, bbox_inches=None, pad_inches=0.1)
 
 
 def cargar2(band4Path, band5Path):
     # Open the image
-    band4 = Image.open(band4Path)
-    band5 = Image.open(band5Path)
+    band4 = rasterio.open(band4Path)
+    band5 = rasterio.open(band5Path)
 
     try:
-        red = np.asarray(band4, dtype='float64')
-        nir = np.asarray(band5, dtype='float64')
+        #red = np.asarray(band4, dtype='float64')
+        #nir = np.asarray(band5, dtype='float64')
+        red = band4.read(1).astype('float64')
+        nir = band5.read(1).astype('float64')
         red = listar(red)
         nir = listar(nir)
 
@@ -58,11 +63,11 @@ def cargar2(band4Path, band5Path):
         red = np.asarray(band4.getdata(), dtype='float64')
         nir = np.asarray(band5.getdata(), dtype='float64')
 
+
     data = {'red': red,'nir': nir}
     df = pd.DataFrame(data, columns = ['red', 'nir'])
     dfCopy = normalizar(df)
-
-    return dfCopy
+    return df
 
 def predecir(pathbanda4, pathbanda5, model):
     data = cargar2(pathbanda4, pathbanda5)
@@ -70,7 +75,6 @@ def predecir(pathbanda4, pathbanda5, model):
     grafica(predictions)
     data['ndvi'] = predictions
     dispersion(data)
-    print("0")
     mapa(pathbanda4)
     return predictions
 
@@ -79,7 +83,6 @@ def listar(matrix):
     for lista in matrix:
         for object in lista:
             resultado.append(object)
-
 
     return resultado
 
@@ -95,34 +98,30 @@ def grafica(df):
     plt.bar(indice_barras, urbano, width=ancho_barras, label='Urbano')
     plt.bar(indice_barras + ancho_barras, noUrbano, width=ancho_barras, label='No urbano')
     plt.legend(loc='best')
-    ## Se colocan los indicadores en el eje x
-    # plt.xticks(indice_barras + ancho_barras, ('Urbano','No urbano'))
 
     plt.ylabel('Cantidad')
     plt.xlabel('Clasificacion')
     plt.title('Clasificacion de suelo urbano vs no urbano')
 
-    #plt.show()
     plt.savefig(r'..\ui\img\graficoBarras.jpg', dpi=None, facecolor='w', edgecolor='w',
         orientation='portrait', format=None,
         transparent=False, bbox_inches=None, pad_inches=0.1)
+    plt.clf()
+    plt.close()
 
 def normalizar(df):
-    variables_input = ['red', 'green', 'blue']
+    variables_input = ['red', 'nir']
 
-    df_x = deepcopy(df[variables_input])
-    print('\nDataframe de entrada:')
-    print(df_x)
+    df = deepcopy(df[variables_input])
 
     rango_de_salida_de_las_variables_escaladas = (
-        0, 1)  # Tupla con el siguiente formato: (mínimo deseado, máximo deseado).
+        0, 1)  # Tupla con el siguiente formato: (mínimo deseado, máximo deseado)
+
     scaler = MinMaxScaler(feature_range=rango_de_salida_de_las_variables_escaladas)
 
-    df_x[variables_input] = scaler.fit_transform(df_x[variables_input])
+    df[variables_input] = scaler.fit_transform(df[variables_input])
 
-    return df_x
-
-
+    return df
 
 
 def dispersion(df):
@@ -144,6 +143,7 @@ def dispersion(df):
                 edgecolor='w',
                 orientation='portrait', format=None,
                 transparent=False, bbox_inches=None, pad_inches=0.1)
+    plt.clf()
 
 
 

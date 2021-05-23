@@ -8,6 +8,7 @@
 import time
 
 import joblib
+from PIL import Image
 import numpy
 from model import monacoPavariar
 from numpy import array
@@ -53,9 +54,18 @@ class Ui_ventana(QMainWindow):
         self.graficoDeDispercion.setObjectName("graficoDeDispercion")
         self.graficoDeDispercion.setVisible(False)
 
+        self.mostarMapa = QtWidgets.QPushButton(ventana)
+        self.mostarMapa.setGeometry(QtCore.QRect(680, 150, 161, 27))
+        self.mostarMapa.clicked.connect(self.showMapa)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.mostarMapa.setFont(font)
+        self.mostarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
+        self.mostarMapa.setObjectName("graficoDeDispercion")
+        self.mostarMapa.setVisible(False)
+
         self.cargarMapa = QtWidgets.QPushButton(ventana)
         self.cargarMapa.clicked.connect(self.Cargar)
-        # self.cargarMapa.clicked.connect(self.loadTif)
         self.cargarMapa.setGeometry(QtCore.QRect(710, 300, 121, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -112,13 +122,23 @@ class Ui_ventana(QMainWindow):
         QtCore.QMetaObject.connectSlotsByName(ventana)
 
     def showDispercion(self):
-        self.diagramDispercion.setVisible(True)
+        self.labelMapa.setVisible(False)
         self.diagramBarras.setVisible(False)
+        self.diagramDispercion.setVisible(True)
         self.confirmacionUNO.setVisible(False)
         self.confirmacionDOS.setVisible(False)
         self.diagramDispercion.setStyleSheet("border-image: url(img/graficoDispercion.png);")
 
+    def showMapa(self):
+        self.labelMapa.setVisible(True)
+        self.diagramDispercion.setVisible(False)
+        self.diagramBarras.setVisible(False)
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
+        self.labelMapa.setStyleSheet("border-image: url(img/mapa.png);")
+
     def showBarras(self):
+        self.labelMapa.setVisible(False)
         self.diagramBarras.setVisible(True)
         self.diagramDispercion.setVisible(False)
         self.confirmacionUNO.setVisible(False)
@@ -130,6 +150,7 @@ class Ui_ventana(QMainWindow):
         ventana.setWindowTitle(_translate("ventana", "Clasificación del suelo Mónaco"))
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
+        self.mostarMapa.setText(_translate("ventana", "Combinación bandas"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
         self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
                                                            "correctamente"))
@@ -147,16 +168,15 @@ class Ui_ventana(QMainWindow):
         label.setPixmap(imagen)
 
     def Cargar(self):
-        print(0)
         self.diagramBarras.setVisible(False)
         self.diagramDispercion.setVisible(False)
+        self.mostarMapa.setVisible(False)
 
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
-                                                      "Archivos de imagen (*.tif)")
+                                                      "Archivos de imagen (*.tiff)")
 
         self.a = numpy.append(self.a, nombreImagen)
-
         self.confirmacionUNO.setVisible(True)
         self.confirmacionDOS.setVisible(True)
 
@@ -167,14 +187,11 @@ class Ui_ventana(QMainWindow):
             self.confirmacionDOS.setVisible(False)
             self.cargarMapa.setDisabled(True)
             self.cargarMapa.setVisible(False)
-            print(1)
             model = joblib.load(r'monacoEntrenado.joblib')
-            print(2)
             monacoPavariar.predecir(self.a[0], self.a[1], model)
-            print(3)
-            #time.sleep(2)
             self.graficoDeDispercion.setVisible(True)
             self.graficoDeBarras.setVisible(True)
+            self.mostarMapa.setVisible(True)
 
 
 class visorImagenes(QMainWindow):
