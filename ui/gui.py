@@ -175,6 +175,7 @@ class Ui_ventana(QMainWindow):
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.mostarMapa.setText(_translate("ventana", "Combinación bandas"))
         self.mostrarBinario.setText(_translate("ventana", "Mapa binario"))
+        self.cargarMapa.setText(_translate("ventana", "Cargar banda 4"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
         self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
                                                            "correctamente"))
@@ -207,6 +208,8 @@ class Ui_ventana(QMainWindow):
 
         if len(self.a) == 1:
             self.confirmacionUNO.setVisible(True)
+            _translate = QtCore.QCoreApplication.translate
+            self.cargarMapa.setText(_translate("ventana", "Cargar banda 5"))
 
         if len(self.a) >= 2:
             self.confirmacionDOS.setVisible(False)
