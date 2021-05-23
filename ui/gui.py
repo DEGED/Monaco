@@ -64,18 +64,6 @@ class Ui_ventana(QMainWindow):
         self.title.setStyleSheet("color: rgb(230, 230, 230);")
         self.title.setObjectName("title")
 
-        self.labelUrbano = QtWidgets.QLabel(ventana)
-        self.labelUrbano.setGeometry(QtCore.QRect(16, 62, 641, 451))
-        # self.labelUrbano.setStyleSheet("border-image: url(:/imagen/img/b5.tif);")
-        self.labelUrbano.setText("")
-        self.labelUrbano.setTextFormat(QtCore.Qt.AutoText)
-        self.labelUrbano.setObjectName("labelUrbano")
-        self.labelRural = QtWidgets.QLabel(ventana)
-        self.labelRural.setGeometry(QtCore.QRect(16, 62, 641, 451))
-        # self.labelRural.setStyleSheet("border-image: url(:/imagen/img/b4.tif);")
-        self.labelRural.setText("")
-        self.labelRural.setObjectName("labelRural")
-
         self.labelMapa = QtWidgets.QLabel(ventana)
         self.labelMapa.setGeometry(QtCore.QRect(16, 62, 641, 451))
         self.labelMapa.setText("")
@@ -91,17 +79,41 @@ class Ui_ventana(QMainWindow):
         self.diagramDispercion.setText("")
         self.diagramDispercion.setObjectName("diagram")
 
+        self.confirmacionUNO = QtWidgets.QLabel(ventana)
+        self.confirmacionUNO.setGeometry(QtCore.QRect(680, 350, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.confirmacionUNO.setFont(font)
+        self.confirmacionUNO.setAcceptDrops(False)
+        self.confirmacionUNO.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionUNO.setObjectName("confirmacionUNO")
+        self.confirmacionDOS = QtWidgets.QLabel(ventana)
+        self.confirmacionDOS.setGeometry(QtCore.QRect(680, 410, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.confirmacionDOS.setFont(font)
+        self.confirmacionDOS.setAcceptDrops(False)
+        self.confirmacionDOS.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionDOS.setObjectName("confirmacionDOS")
+
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
+
         self.retranslateUi(ventana)
         QtCore.QMetaObject.connectSlotsByName(ventana)
 
     def showDispercion(self):
         self.diagramDispercion.setVisible(True)
         self.diagramBarras.setVisible(False)
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
         self.diagramDispercion.setStyleSheet("border-image: url(img/graficoDispercion.png);")
 
     def showBarras(self):
         self.diagramBarras.setVisible(True)
         self.diagramDispercion.setVisible(False)
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
         self.diagramBarras.setStyleSheet("border-image: url(img/graficoBarras.jpg);")
 
     def retranslateUi(self, ventana):
@@ -110,6 +122,10 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
+        self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
+                                                           "correctamente"))
+        self.confirmacionDOS.setText(_translate("ventana", "Por favor seleccione\n"
+                                                           "la otra banda"))
 
     def Mostrar(self, label, imagen, nombre, posicionX=650):
         imagen = QPixmap.fromImage(imagen)
@@ -122,15 +138,26 @@ class Ui_ventana(QMainWindow):
         label.setPixmap(imagen)
 
     def Cargar(self):
+        self.diagramBarras.setVisible(False)
+        self.diagramDispercion.setVisible(False)
+
         nombreImagen, _ = QFileDialog.getOpenFileName(self, "Seleccionar imagen",
                                                       QDir.currentPath(),
                                                       "Archivos de imagen (*.tif)")
 
         self.a = numpy.append(self.a, nombreImagen)
 
-        if len(self.a) >= 2:
-            self.cargarMapa.setDisabled(True)
+        self.confirmacionUNO.setVisible(True)
+        self.confirmacionDOS.setVisible(True)
 
+        if len(self.a) == 1:
+            self.confirmacionUNO.setVisible(True)
+
+        if len(self.a) >= 2:
+            self.confirmacionDOS.setVisible(False)
+            self.cargarMapa.setDisabled(True)
+            
+            self.cargarMapa.setVisible(False)
 
 
 class visorImagenes(QMainWindow):
@@ -160,3 +187,4 @@ if __name__ == "__main__":
     ui.setupUi(ventana)
     ventana.show()
     sys.exit(app.exec_())
+

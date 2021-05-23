@@ -148,14 +148,57 @@ color: rgb(255, 255, 255);</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="confirmacionUNO">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>350</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>El archivo se cargó
+correctamente</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="confirmacionDOS">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>410</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+   <property name="acceptDrops">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Por favor seleccione
+la otra banda</string>
+   </property>
+  </widget>
  </widget>
- <resources>
-  <include location="mapa.qrc"/>
-  <include location="mapa1.qrc"/>
-  <include location="graficoDispercion.qrc"/>
-  <include location="bandaSobreBanda.qrc"/>
-  <include location="graficoBarras.qrc"/>
-  <include location="icono.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
