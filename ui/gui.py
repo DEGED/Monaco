@@ -13,10 +13,12 @@ from PyQt5.QtCore import (Qt, QDir, QFileInfo)
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import (QMainWindow, QMessageBox,
                              QLabel, QFileDialog)
+from model import monacoModel
+
 
 class Ui_ventana(QMainWindow):
-    a = array([])
 
+    a = array([])
     def setupUi(self, ventana):
         ventana.setObjectName("ventana")
         ventana.resize(853, 549)
@@ -158,46 +160,9 @@ class Ui_ventana(QMainWindow):
 
         if len(self.a) >= 2:
             self.cargarMapa.setDisabled(True)
+            print("apunto de vojabeciar")
+            monacoModel.predecir(self.a[0], self.a[1])
 
-        '''
-        if nombreImagen:
-            # Verificar que QLabel tiene imagen
-            labelConImagen = ""
-            if self.labelMapa.pixmap():
-                labelConImagen = self.labelImagen
-
-            imagen = QImage(nombreImagen)
-            if imagen.isNull():
-                if labelConImagen:
-                    self.Eliminar()
-
-                QMessageBox.information(self, "Visor de imágenes",
-                                        "No se puede cargar %s." % nombreImagen)
-                return
-
-            # Obtener ruta de la carpeta que contiene la imagen seleccionada
-            self.carpetaActual = QDir(QFileInfo(nombreImagen).absoluteDir().path())
-
-            # Obtener la ruta y el nombre de las imagenes que se encuentren en la carpeta de
-            # la imagen seleccionada
-            imagenes = self.carpetaActual.entryInfoList(["*.tif"],
-                                                        QDir.Files, QDir.Name)
-            self.imagenesCarpeta = [imagen.absoluteFilePath() for imagen in imagenes]
-
-            self.posicion = self.imagenesCarpeta.index(nombreImagen)
-            self.estadoAnterior = True if self.posicion == 0 else False
-            self.estadoSiguiente = True if self.posicion == len(self.imagenesCarpeta) - 1 else False
-
-            # Nombre y extensión de la imagen
-            nombre = QFileInfo(nombreImagen).fileName()
-
-            if labelConImagen:
-                posicionInternaX = -650
-                labelMostrarImagen = self.labelImagen if self.labelImagenUno.pixmap() else self.labelImagenUno
-                self.Limpiar(labelConImagen, labelMostrarImagen, imagen, nombre, posicionInternaX)
-            else:
-                self.Mostrar(self.labelMapa, imagen, nombre)
-        '''
 
 # ====================== CLASE visorImagenes =======================
 
@@ -222,6 +187,7 @@ class visorImagenes(QMainWindow):
 if __name__ == "__main__":
     import sys
 
+#    monacoModel = monacoModel()
     app = QtWidgets.QApplication(sys.argv)
     ventana = QtWidgets.QDialog()
     ui = Ui_ventana()

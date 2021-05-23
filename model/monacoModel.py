@@ -1,9 +1,6 @@
 import numpy as np
 from PIL import Image
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn.neighbors import KNeighborsClassifier
 import joblib
 
 def cargar2(band4Path, band5Path):
@@ -31,11 +28,11 @@ def cargar2(band4Path, band5Path):
     return df
 
 def predecir(pathbanda4, pathbanda5):
-
+    print("prediciendo")
     model = joblib.load('monacoEntrenado.joblib')
-
+    print("modelo cargado")
     data = cargar2(pathbanda4, pathbanda5)
-
+    print("vojabes")
     print(data)
 
     predictions = model.predict(data)
@@ -52,5 +49,3 @@ def listar(matrix):
     return resultado
 
 
-vojabes = predecir( r'C:\Users\prestamo\PycharmProjects\Monaco\Monaco\img\b4.tif', r'C:\Users\prestamo\PycharmProjects\Monaco\Monaco\img\b4.tif')
-print(vojabes)
