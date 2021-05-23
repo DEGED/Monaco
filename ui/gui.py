@@ -91,6 +91,26 @@ class Ui_ventana(QMainWindow):
         self.diagramDispercion.setText("")
         self.diagramDispercion.setObjectName("diagram")
 
+        self.confirmacionUNO = QtWidgets.QLabel(ventana)
+        self.confirmacionUNO.setGeometry(QtCore.QRect(680, 350, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.confirmacionUNO.setFont(font)
+        self.confirmacionUNO.setAcceptDrops(False)
+        self.confirmacionUNO.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionUNO.setObjectName("confirmacionUNO")
+        self.confirmacionDOS = QtWidgets.QLabel(ventana)
+        self.confirmacionDOS.setGeometry(QtCore.QRect(680, 410, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.confirmacionDOS.setFont(font)
+        self.confirmacionDOS.setAcceptDrops(False)
+        self.confirmacionDOS.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionDOS.setObjectName("confirmacionDOS")
+
+        self.confirmacionUNO.setVisible(False)
+        self.confirmacionDOS.setVisible(False)
+
         self.retranslateUi(ventana)
         QtCore.QMetaObject.connectSlotsByName(ventana)
 
@@ -110,6 +130,10 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setText(_translate("ventana", "Grafico de Barras"))
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
+        self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
+                                                           "correctamente"))
+        self.confirmacionDOS.setText(_translate("ventana", "Por favor seleccione\n"
+                                                           "la otra banda"))
 
     def Mostrar(self, label, imagen, nombre, posicionX=650):
         imagen = QPixmap.fromImage(imagen)
@@ -128,7 +152,14 @@ class Ui_ventana(QMainWindow):
 
         self.a = numpy.append(self.a, nombreImagen)
 
+        self.confirmacionUNO.setVisible(True)
+        self.confirmacionDOS.setVisible(True)
+
+        if len(self.a) == 1:
+            self.confirmacionUNO.setVisible(True)
+
         if len(self.a) >= 2:
+            self.confirmacionDOS.setVisible(False)
             self.cargarMapa.setDisabled(True)
 
 
@@ -160,3 +191,4 @@ if __name__ == "__main__":
     ui.setupUi(ventana)
     ventana.show()
     sys.exit(app.exec_())
+

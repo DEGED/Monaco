@@ -33,7 +33,8 @@ class Ui_ventana(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.cargarMapa.setFont(font)
-        self.cargarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(255, 255, 255);")
+        self.cargarMapa.setStyleSheet("background-color: rgb(60, 63, 65);\n"
+"color: rgb(255, 255, 255);")
         self.cargarMapa.setObjectName("cargarMapa")
         self.title = QtWidgets.QLabel(ventana)
         self.title.setGeometry(QtCore.QRect(230, 10, 251, 31))
@@ -58,6 +59,22 @@ class Ui_ventana(object):
         self.labelBarras.setStyleSheet("border-image: url(:/graficoBarras/img/graficoBarras.png);")
         self.labelBarras.setText("")
         self.labelBarras.setObjectName("labelBarras")
+        self.confirmacionUNO = QtWidgets.QLabel(ventana)
+        self.confirmacionUNO.setGeometry(QtCore.QRect(680, 350, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.confirmacionUNO.setFont(font)
+        self.confirmacionUNO.setAcceptDrops(False)
+        self.confirmacionUNO.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionUNO.setObjectName("confirmacionUNO")
+        self.confirmacionDOS = QtWidgets.QLabel(ventana)
+        self.confirmacionDOS.setGeometry(QtCore.QRect(680, 410, 161, 61))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.confirmacionDOS.setFont(font)
+        self.confirmacionDOS.setAcceptDrops(False)
+        self.confirmacionDOS.setStyleSheet("color: rgb(255, 255, 255);")
+        self.confirmacionDOS.setObjectName("confirmacionDOS")
 
         self.retranslateUi(ventana)
         QtCore.QMetaObject.connectSlotsByName(ventana)
@@ -69,13 +86,11 @@ class Ui_ventana(object):
         self.graficoDeDispercion.setText(_translate("ventana", "Grafico de Dispersión"))
         self.cargarMapa.setText(_translate("ventana", "Cargar bandas"))
         self.title.setText(_translate("ventana", "Análisis Mónaco"))
+        self.confirmacionUNO.setText(_translate("ventana", "El archivo se cargó\n"
+"correctamente"))
+        self.confirmacionDOS.setText(_translate("ventana", "Por favor seleccione\n"
+"la otra banda"))
 
-import bandaSobreBanda_rc
-import graficoBarras_rc
-import graficoDispercion_rc
-import icono_rc
-import mapa1_rc
-import mapa_rc
 
 if __name__ == "__main__":
     import sys
