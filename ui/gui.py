@@ -172,7 +172,9 @@ class Ui_ventana(QMainWindow):
 
 
 class visorImagenes(QMainWindow):
+
     def __init__(self, parent=None):
+
         super(visorImagenes, self).__init__(parent)
 
         self.setWindowTitle("CargarImagen")

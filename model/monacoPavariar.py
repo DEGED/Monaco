@@ -2,9 +2,39 @@ from PIL import Image
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import cv2
 import joblib
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
+
+
+def mapa(band4Path):
+    print("1")
+    band4 = Image.open(band4Path)
+    print("2")
+    band4Copy = band4
+    band4Copy = np.array(band4Copy.getdata()).reshape(band4Copy.size[1], band4Copy[0], 3)
+    #band4.dtype
+    print("3")
+    band4.transform
+    plt.imshow(band4)
+
+    plt.savefig(r'..\ui\img\mapa.png', dpi=None, facecolor='w',
+                edgecolor='w',
+                orientation='portrait', format=None,
+                transparent=False, bbox_inches=None, pad_inches=0.1)
+    print("4")
+    image = cv2.imread(r'..\ui\img\mapa.png')
+    original = image.copy()
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    lower = np.array([22, 93, 0], dtype="uint8")
+    upper = np.array([45, 255, 255], dtype="uint8")
+    mask = cv2.inRange(image, lower, upper)
+    output = cv2.bitwise_and(image, image, mask=mask)
+    plt.subplot(1, 2, 1)
+    plt.imshow(mask, cmap="gray")
+    plt.subplot(1, 2, 2)
+    plt.imshow(output)
 
 
 def cargar2(band4Path, band5Path):
@@ -30,10 +60,13 @@ def cargar2(band4Path, band5Path):
 def predecir(pathbanda4, pathbanda5, model):
     data = cargar2(pathbanda4, pathbanda5)
     predictions = model.predict(data)
+    print(predictions)
 
     grafica(predictions)
     data['ndvi'] = predictions
     dispersion(data)
+    print("0")
+    #mapa(pathbanda4)
     return predictions
 
 def listar(matrix):
@@ -41,6 +74,8 @@ def listar(matrix):
     for lista in matrix:
         for object in lista:
             resultado.append(object)
+
+
     return resultado
 
 def grafica(df):
@@ -88,4 +123,7 @@ def dispersion(df):
                 edgecolor='w',
                 orientation='portrait', format=None,
                 transparent=False, bbox_inches=None, pad_inches=0.1)
+
+
+
 
