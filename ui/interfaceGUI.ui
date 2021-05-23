@@ -198,6 +198,16 @@ correctamente</string>
 la otra banda</string>
    </property>
   </widget>
+  <widget class="QGraphicsView" name="graphicsView">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>62</y>
+     <width>641</width>
+     <height>451</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

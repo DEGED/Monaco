@@ -5,7 +5,11 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
+import time
+
+import joblib
 import numpy
+from model import monacoPavariar
 from numpy import array
 from PyQt5 import QtCore
 from PyQt5 import QtGui, QtWidgets
@@ -26,6 +30,7 @@ class Ui_ventana(QMainWindow):
         ventana.setWindowOpacity(1.0)
         ventana.setStyleSheet("background-color: rgb(43, 43, 43);")
 
+
         self.graficoDeBarras = QtWidgets.QPushButton(ventana)
         self.graficoDeBarras.setGeometry(QtCore.QRect(680, 90, 161, 25))
         self.graficoDeBarras.clicked.connect(self.showBarras)
@@ -34,15 +39,17 @@ class Ui_ventana(QMainWindow):
         self.graficoDeBarras.setFont(font)
         self.graficoDeBarras.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
         self.graficoDeBarras.setObjectName("graficoDeBarras")
+        self.graficoDeBarras.setVisible(False)
 
         self.graficoDeDispercion = QtWidgets.QPushButton(ventana)
-        self.graficoDeDispercion.setGeometry(QtCore.QRect(680, 120, 161, 25))
+        self.graficoDeDispercion.setGeometry(QtCore.QRect(680, 120, 161, 27))
         self.graficoDeDispercion.clicked.connect(self.showDispercion)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.graficoDeDispercion.setFont(font)
         self.graficoDeDispercion.setStyleSheet("background-color: rgb(60, 63, 65);\n""color: rgb(230, 230, 230);")
         self.graficoDeDispercion.setObjectName("graficoDeDispercion")
+        self.graficoDeDispercion.setVisible(False)
 
         self.cargarMapa = QtWidgets.QPushButton(ventana)
         self.cargarMapa.clicked.connect(self.Cargar)
@@ -156,8 +163,12 @@ class Ui_ventana(QMainWindow):
         if len(self.a) >= 2:
             self.confirmacionDOS.setVisible(False)
             self.cargarMapa.setDisabled(True)
-            
             self.cargarMapa.setVisible(False)
+            model = joblib.load('img/monacoEntrenado.joblib')
+            monacoPavariar.predecir(self.a[0], self.a[1], model)
+            #time.sleep(2)
+            self.graficoDeDispercion.setVisible(True)
+            self.graficoDeBarras.setVisible(True)
 
 
 class visorImagenes(QMainWindow):

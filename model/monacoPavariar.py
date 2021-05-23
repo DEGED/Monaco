@@ -11,10 +11,6 @@ def cargar2(band4Path, band5Path):
     # Open the image
     band4 = Image.open(band4Path)
     band5 = Image.open(band5Path)
-    print(band4)
-    print(band5)
-    #red = band4.read(1).astype('float64')
-    #nir = band5.read(1).astype('float64')
 
     try:
         red = np.asarray(band4, dtype='float64')
@@ -31,15 +27,8 @@ def cargar2(band4Path, band5Path):
 
     return df
 
-def predecir(pathbanda4, pathbanda5):
-
-
-    model = joblib.load('monacoEntrenado.joblib')
-
+def predecir(pathbanda4, pathbanda5, model):
     data = cargar2(pathbanda4, pathbanda5)
-
-    print(data)
-
     predictions = model.predict(data)
 
     grafica(predictions)
@@ -52,8 +41,6 @@ def listar(matrix):
     for lista in matrix:
         for object in lista:
             resultado.append(object)
-
-
     return resultado
 
 def grafica(df):
@@ -77,9 +64,8 @@ def grafica(df):
 
     #plt.show()
     plt.savefig(r'..\ui\img\graficoBarras.jpg', dpi=None, facecolor='w', edgecolor='w',
-        orientation='portrait', papertype=None, format=None,
-        transparent=False, bbox_inches=None, pad_inches=0.1,
-        frameon=None, metadata=None)
+        orientation='portrait', format=None,
+        transparent=False, bbox_inches=None, pad_inches=0.1)
 
 
 
@@ -98,16 +84,8 @@ def dispersion(df):
 
     plt.title('Grafico dispersion dataset')
     plt.legend(loc='best')
-
-    #plt.show()
-
     plt.savefig(r'..\ui\img\graficoDispercion.png', dpi=None, facecolor='w',
                 edgecolor='w',
-                orientation='portrait', papertype=None, format=None,
-                transparent=False, bbox_inches=None, pad_inches=0.1,
-                frameon=None, metadata=None)
+                orientation='portrait', format=None,
+                transparent=False, bbox_inches=None, pad_inches=0.1)
 
-
-
-vojabes = predecir( r'C:\Users\prestamo\PycharmProjects\Monaco\ui\img\b4.tif', r'C:\Users\prestamo\PycharmProjects\Monaco\ui\img\b4.tif')
-print(vojabes)
